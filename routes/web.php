@@ -34,24 +34,32 @@ Route::get('/posts/{id}', function ($id)  use ($posts) {
 
 Route::view('/', 'posts.show');
 
-Route::get('/fun/response', function () use ($posts) {
-    return response($posts, 201)
-        ->header('Content-Type', 'application/json')
-        ->cookie('my-cookie', 'Zubillion', 3600);
+
+
+Route::prefix('fun')->name('fun.')->group(function () use ($posts) {
+    Route::get('/response', function () use ($posts) {
+        return response($posts, 201)
+            ->header('Content-Type', 'application/json')
+            ->cookie('my-cookie', 'Zubillion', 3600);
+    })->name('response');
+
+    Route::get('/redirect', function () {
+        return redirect('/');
+    })->name('redirect');
+    Route::get('/back', function () {
+        return back();
+    })->name('back');
+    Route::get('/named-route', function () {
+        return redirect()->route('posts.show', ['id' => 1]);
+    })->name('named-route');
+    Route::get('/away', function () {
+        return redirect()->away('https://google.com');
+    })->name('away');
+    Route::get('/json', function () use ($posts) {
+        return response()->json($posts);
+    })->name('json');
+    Route::get('/download', function () use ($posts) {
+        return response()->download(public_path('/daniel.jpg'), 'face.jpg');
+    })->name('download');
 });
 
-Route::get('/fun/redirect', function () {
-    return redirect('/');
-});
-Route::get('/fun/back', function () {
-    return back();
-});
-Route::get('/fun/named-route', function () {
-    return redirect()->route('posts.show', ['id' => 1]);
-});
-Route::get('/fun/away', function () {
-    return redirect()->away('https://google.com');
-});
-Route::get('/fun/json', function() use($posts) {
-
-});
