@@ -4,3 +4,7 @@
 @isset($record)
     Do something
 @endisset
+
+@error('title')
+    <p>{{ $message }}</p>
+@enderror

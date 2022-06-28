@@ -2,10 +2,8 @@
 
 @section('content')
 
-    Web page content here
+    <h1>Web page content here</h1>
+    <p>Take a look</p>
 
 @endsection
 
-<title>Laravel Project -- @yield('title')</title>
-
-@section('title', 'Contact Page')
