@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <h1>Web page content here</h1>
-    <p>Take a look</p>
+    <h1>Main Blog Page</h1>
+    
 
 @endsection
 

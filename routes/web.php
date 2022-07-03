@@ -19,7 +19,16 @@ use App\Http\Controllers\AboutController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home.index');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('home.contact');
+Route::get('/posts', function () {
+    return view('posts.index');
+})->name('posts.index');
+Route::get('/posts/create', function () {
+    return view('posts.create');
+})->name('posts.create');
 
 Route::resource('post', PostController::class)->only(['index', 'show']);
 
