@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AboutController;
 
@@ -17,20 +16,9 @@ use App\Http\Controllers\AboutController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('home.index');
-Route::get('/contact', function () {
-    return view('contact');
-})->name('home.contact');
-Route::get('/posts', function () {
-    return view('posts.index');
-})->name('posts.index');
-Route::get('/posts/create', function () {
-    return view('posts.create');
-})->name('posts.create');
 
-Route::resource('post', PostController::class)->only(['index', 'show']);
+
+// Route::resource('post', PostController::class)->only(['index', 'show']);
 
 // Route::get('/posts/{id}', function ($id)  use ($posts) {
 //     abort_if(!isset($posts[$id]), 404);
@@ -74,3 +62,42 @@ Route::resource('post', PostController::class)->only(['index', 'show']);
 // Route::get('/home', [HomeController::class, 'home']);
 
 // Route::get('/single', AboutController::class);
+
+// Route::get('/', function () {
+//     return view('index');
+// })->name('home.index');
+
+// Route::get('/contact', function () {
+//     return view('contact');
+// })->name('home.contact');
+
+// Route::get('/posts', function () {
+//     return view('posts.show');
+// })->name('posts.show');
+
+// Route::get('/posts/{id}/edit', function ($id) {
+//     return view('posts.edit');
+// })->name('posts.edit');
+
+// Route::get('/posts/create', function () {
+//     return view('posts.create');
+// })->name('posts.create');
+
+
+Route::get('/', [PostController::class, 'index'])->name('home.index');
+
+//show single post
+Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
+
+//Show create new post form
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+
+//Store New Listing Data
+Route::post('posts', [PostController::class, 'store']);
+
+//Show edit form
+Route::get('post/{post}/edit', [PostController::class, 'edit']);
+
+
+
+Route::get('/contact', [ContactController::class, 'index'])->name('home.contact');

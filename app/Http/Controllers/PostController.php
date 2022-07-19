@@ -15,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = BlogPost::latest()->paginate(4);
+
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -45,7 +47,7 @@ class PostController extends Controller
         $post->content = $validated['content'];
         $post->save();
 
-        
+
         return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
