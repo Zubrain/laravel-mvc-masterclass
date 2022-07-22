@@ -23,6 +23,21 @@
                     <section class="mb-5">
                         {{ $post->content }}
                     </section>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="/post/{{$post->id}}/edit" class="btn btn-secondary mb-3">Edit Post</a>
+                        </div>
+                        <div class="col-md-6">
+                        <form method="POST" action="/post/{{$post->id}}" class="text-end">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger mb-3">
+                                Delete Post
+                            </button>
+                        </form>
+                    </div>
+                    </div>
+                   
                 </article>
 
 

@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
      <!-- Favicon-->
      <link rel="icon" type="image/x-icon" href="{{ asset('blog/assets/favicon.ico') }}" />
      <!-- Core theme CSS (includes Bootstrap)-->
      {{-- <link href="{{ asset('blog/css/styles.css') }}" rel="stylesheet" /> --}}
+     <script src="//unpkg.com/alpinejs" defer></script>
+     {{-- <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        laravel: "#ef3b2d",
+                    },
+                },
+            },
+        };
+    </script> --}}
 
     <script src="{{ mix('js/app.js') }}" defer></script>
     <title>Laravel Blog - @yield('title')</title>
@@ -39,8 +52,18 @@
       <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
   </footer>
   <!-- Bootstrap core JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></scrip>
   <!-- Core theme JS-->
   <script src="{{ asset('blog/js/scripts.js') }}"></script>
+
+
+  @if (session()->has('message'))
+    <div x-data="{ show: true }" x-init="setTimeout(()=> show = false, 5000)" x-show="show" 
+        class="position-absolute top-0 start-50 translate-middle-x">
+    <p class="alert alert-success" role="alert">
+        {{ session('message') }}
+    </p>
+    </div>
+@endif
 </body>
 </html>

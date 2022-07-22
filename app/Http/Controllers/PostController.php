@@ -40,17 +40,11 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-        $validated = $request->validated();
+        $validatedData = $request->validated();
 
-
-
-        $post = new BlogPost();
-        $post->title = $validated['title'];
-        $post->content = $validated['content'];
-        $post->save();
-
-
-        return redirect('/')->with('message', 'Post Created Successfully!');
+        $blogPost = BlogPost::create($validatedData);
+       
+        return redirect('/post/' . $blogPost->id)->with('message', 'Post Created Successfully!');
     }
 
     /**
@@ -77,9 +71,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BlogPost $post)
     {
-        //
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -89,9 +83,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BlogPost $post)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $post->update($formFields);
+
+        return back()->with('message', 'Post Updated Successfully!');
     }
 
     /**
@@ -100,8 +101,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(BlogPost $post)
     {
-        //
+        $post->delete();
+        return redirect('/')->with('message', 'Post deleted successfully');
     }
 }

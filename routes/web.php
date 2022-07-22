@@ -98,6 +98,12 @@ Route::post('posts', [PostController::class, 'store']);
 //Show edit form
 Route::get('post/{post}/edit', [PostController::class, 'edit']);
 
+//Update post
+Route::put('post/{post}', [PostController::class, 'update']);
+
+//Delete post
+Route::delete('post/{post}', [PostController::class, 'destroy']);
+
 
 
 Route::get('/contact', [ContactController::class, 'index'])->name('home.contact');
