@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePost;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -28,6 +29,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('posts.create');
     }
 
     /**
@@ -48,7 +50,7 @@ class PostController extends Controller
         $post->save();
 
 
-        return redirect()->route('posts.show', ['post' => $post->id]);
+        return redirect('/')->with('message', 'Post Created Successfully!');
     }
 
     /**
@@ -59,7 +61,14 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        //show single post
+        $post = DB::table('blog_posts')->find($id);
+
+        if ($post) {
+            return view('posts.show', ['post' => $post]);
+        } else {
+            abort('404');
+        }
     }
 
     /**
