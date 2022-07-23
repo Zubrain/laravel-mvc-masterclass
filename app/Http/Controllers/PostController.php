@@ -43,8 +43,8 @@ class PostController extends Controller
         $validatedData = $request->validated();
 
         $blogPost = BlogPost::create($validatedData);
-       
-        return redirect('/post/' . $blogPost->id)->with('message', 'Post Created Successfully!');
+
+        return redirect("/post/$blogPost->id")->with('message', 'Post Created Successfully!');
     }
 
     /**
@@ -92,7 +92,7 @@ class PostController extends Controller
 
         $post->update($formFields);
 
-        return back()->with('message', 'Post Updated Successfully!');
+        return redirect("/post/$post->id")->with('message', 'Post Updated Successfully!');
     }
 
     /**

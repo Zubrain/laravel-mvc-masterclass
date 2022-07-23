@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,16 +94,16 @@ Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
 //Store New Listing Data
-Route::post('posts', [PostController::class, 'store']);
+Route::post('/posts', [PostController::class, 'store']);
 
 //Show edit form
-Route::get('post/{post}/edit', [PostController::class, 'edit']);
+Route::get('/post/{post}/edit', [PostController::class, 'edit']);
 
 //Update post
-Route::put('post/{post}', [PostController::class, 'update']);
+Route::put('/post/{post}', [PostController::class, 'update']);
 
 //Delete post
-Route::delete('post/{post}', [PostController::class, 'destroy']);
+Route::delete('/post/{post}', [PostController::class, 'destroy']);
 
 
 
