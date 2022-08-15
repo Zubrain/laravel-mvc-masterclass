@@ -42,8 +42,16 @@
                             <!-- Blog post-->
                             <div class="card mb-4">
                                 <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">{{ $post->created_at->diffForHumans() }}</div>
+                                <div class="card-body row">
+                                    <div class="small text-muted col-md-6">{{ $post->created_at->diffForHumans() }}</div>
+                                    
+                                    @if ($post->comments_count)
+                                    <div class="small text-muted col-md-6 text-end">{{ $post->comments_count }} Comments</div>
+                                    @else
+                                    <div class="small text-muted col-md-6 text-end">{{ 'No comments yet' }}</div>
+                                    
+                                        @endif
+                                
                                     <h2 class="card-title h4">{{ $post->title }}</h2>
                                     @php
                                         if (strlen($post->content) < 45) {
@@ -64,7 +72,7 @@
 
                 <!-- Pagination-->
                 <div class="mt-6 p-4">
-                    {{ $posts->links() }}
+                    {{-- {{ $posts->links() }} --}}
                 </div>
                 {{-- <nav aria-label="Pagination">
                     <hr class="my-0" />

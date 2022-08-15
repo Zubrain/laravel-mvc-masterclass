@@ -35,7 +35,7 @@
                                 Delete Post
                             </button>
                         </form>
-                    </div>
+                        </div>
                     </div>
                    
                 </article>

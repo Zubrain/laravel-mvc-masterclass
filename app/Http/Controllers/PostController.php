@@ -16,9 +16,21 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::latest()->paginate(4);
+        // DB::connection()->enableQueryLog();
+        // $posts = BlogPost::with('comments')->get();
+        // foreach ($posts as $post) {
+        //     foreach ($post->comments as $comment) {
+        //         echo $comment->content;
+        //     }
+        // }
+        // dd(DB::getQueryLog());
 
-        return view('posts.index', ['posts' => $posts]);
+        //withCount = comments_count
+        $posts = BlogPost::withCount('comments')->get();
+        return view(
+            'posts.index',
+            ['posts' => $posts]
+        );
     }
 
     /**
