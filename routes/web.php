@@ -87,20 +87,26 @@ use App\Http\Controllers\ContactController;
 
 Route::get('/', [PostController::class, 'index'])->name('home.index');
 
+
 //show single post
 Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
+
 
 //Show create new post form
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 
+
 //Store New Listing Data
 Route::post('/posts', [PostController::class, 'store']);
+
 
 //Show edit form
 Route::get('/post/{post}/edit', [PostController::class, 'edit']);
 
+
 //Update post
 Route::put('/post/{post}', [PostController::class, 'update']);
+
 
 //Delete post
 Route::delete('/post/{post}', [PostController::class, 'destroy']);

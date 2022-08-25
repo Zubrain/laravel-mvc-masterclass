@@ -20,12 +20,15 @@ class PostTest extends TestCase
     private function createDummyBlogPost(): BlogPost
     {
         //Arrange part
-        $post = new BlogPost();
-        $post->title = 'New Blog Post';
-        $post->content = 'The content of the new blog post';
-        $post->save();
+        
+        return BlogPost::factory()->newTitle()->create();
+        
+        // $post = new BlogPost();
+        // $post->title = 'New Blog Post';
+        // $post->content = 'The content of the new blog post';
+        // $post->save();
+        // return $post;
 
-        return $post;
     }
 
     public function test_see_1_blog_post_when_there_is_one()
@@ -54,10 +57,9 @@ class PostTest extends TestCase
 
         $response = $this->get('/');
 
-         //Assert
-         $response->assertSeeText('New Blog Post');
-         $response->assertSeeText('4 Comments');
-
+        //Assert
+        $response->assertSeeText('New Blog Post');
+        $response->assertSeeText('4 Comments');
     }
 
     public function testStoreValid()
